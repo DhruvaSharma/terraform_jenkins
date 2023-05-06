@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                sh 'terraform init'
+                sh 'sudo terraform init'
             }
         }
         // stage('Terraform Apply') {
