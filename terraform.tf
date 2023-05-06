@@ -8,11 +8,12 @@ terraform {
 
   required_version = ">= 1.2.0"
 }
-# Define provider and required variables
+
 provider "aws" {
   region = "us-east-1"
 }
 
+# variables
 variable "aws_region" {
   default = "us-east-1"
 }
@@ -20,14 +21,23 @@ variable "aws_region" {
 # Create VPC with private subnets, no NAT gateway
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "eks_vpc"
+  }
 }
 
 resource "aws_subnet" "private_subnet_1" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = "10.0.1.0/24"
+  tags = {
+    Name = "eks_psubnet1"
+  }
 }
 
 resource "aws_subnet" "private_subnet_2" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = "10.0.2.0/24"
+  tags = {
+    Name = "eks_psubnet2"
+  }
 }
